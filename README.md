@@ -12,7 +12,7 @@ Le lancement a été simplifié par un script automatique. Suivez ces étapes :
 Sur votre Mac, appuyez sur les touches `Commande (⌘) + Espace`, tapez **Terminal** et appuyez sur `Entrée`.
 
 ### 2. Se placer dans le bon dossier
-Copiez et collez la commande suivante dans votre terminal, puis appuyez sur `Entrée` :
+Allez dans le dossier du projet :
 ```bash
 cd /xx/xx/alterna_simulator/
 ```
@@ -32,7 +32,7 @@ bash run.sh
 ## Comment utiliser le Dashboard ?
 
 ### 1. Volet Pédagogique (Graphique Circulaire)
-Ce graphique montre exactement ce que paie un client pour 1 MWh :
+Ce graphique montre exactement de quoi se compose l'offre pour 1 MWh :
 - **Part Énergie** : Prix d'achat sur le marché de gros.
 - **Acheminement** : Coûts fixes pour transporter l'électricité (réseaux Enedis/RTE).
 - **Taxes** : Les parts obligatoires prélevées par l'État.
