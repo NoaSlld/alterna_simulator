@@ -17,12 +17,27 @@ Allez dans le dossier du projet :
 cd /xx/xx/alterna_simulator/
 ```
 
-### 3. Lancer l'application
-Copiez et collez cette commande finale pour démarrer le simulateur :
-```bash
-bash run.sh
-```
+## Installation et Lancement
 
+1. **Configuration des identifiants API** :
+   - Ouvrez le fichier `.env` à la racine.
+   - Remplissez vos clés `EPEX_CLIENT_ID` et `EPEX_CLIENT_SECRET` obtenues sur le portail [RTE Data France](https://data.rte-france.com/).
+   - Assurez-vous d'être abonné à l'API **Wholesale Market v3**.
+
+2. **Lancer le simulateur** :
+   ```bash
+   bash run.sh
+   ```
+
+## Intégration API Marché (RTE)
+
+Le simulateur est connecté en temps réel aux données de **RTE France** pour récupérer les prix Spot (Day-Ahead).
+
+- **Pré-remplissage automatique** : Au lancement, le curseur "Prix de Gros" se cale sur la dernière valeur moyenne du marché.
+- **Cache Persistant** : Pour économiser votre quota d'appels, l'application stocke le prix dans un fichier `market_data_cache.json`. Elle ne fait qu'un seul appel par jour.
+- **Sécurité** : Vos identifiants sont protégés via le fichier `.env`.
+
+## Fonctionnalités du Dashboard
 **Que va-t-il se passer ?**
 - Lors du premier lancement, le script va préparer un environnement sécurisé pour Python et installer les outils nécessaires (Streamlit, Pandas, Plotly).
 - Ensuite, une page internet s'ouvrira automatiquement dans votre navigateur par défaut avec le Dashboard interactif.
@@ -49,7 +64,7 @@ Comparez instantanément le prix simulé d'Alterna avec les tarifs actuels d'**E
 
 ---
 
-## 🛠️ Informations Techniques
+## Informations Techniques
 - **Langage** : Python
 - **Interface** : Streamlit
 - **Données** : Modélisation basée sur les structures de coûts types du marché français du détail.

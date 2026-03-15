@@ -10,6 +10,11 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 
 from core.engine import AlternaSourcingEngine
 from utils.report import ReportGenerator
+from infrastructure.market_api import RTEApiAdapter
+
+# Initialisation de l'API
+adapter = RTEApiAdapter()
+live_market_price = adapter.fetch_latest_market_price() or 100.0
 
 # config de la page
 st.set_page_config(page_title="Simulateur d'Offres Alterna Énergie", layout="wide")
@@ -31,7 +36,7 @@ st.markdown("### Simulation de l'impact des variations du marché sur les offres
 st.sidebar.header("Configuration de l'Offre")
 
 with st.sidebar.expander("Coûts Marché & Réglementés", expanded=True):
-    val_prix_gros = st.slider("Prix de Gros (€/MWh)", 0, 400, 100, step=5)
+    val_prix_gros = st.slider("Prix de Gros (€/MWh)", 0, 400, int(live_market_price), step=1)
     val_turpe = st.slider("Acheminement / TURPE (€/MWh)", 0, 150, 45, step=1)
     val_taxes_fix = st.slider("Taxes (TICFE + CTA) (€/MWh)", 0, 100, 36, step=1)
     val_tva_rate = st.slider("TVA (%)", 0, 30, 20, step=1) / 100.0
@@ -80,7 +85,7 @@ with col1:
         marker=dict(colors=color_palette)
     )])
     fig_pie.update_layout(legend=dict(orientation="h", y=-0.2), template="plotly_white")
-    st.plotly_chart(fig_pie, use_container_width=True)
+    st.plotly_chart(fig_pie, width='stretch')
     
     delta = res.nouvelle_marge - val_marge_cible
     st.metric("Marge Réelle", f"{res.nouvelle_marge:.2f} €/MWh", delta=f"{delta:.2f} €" if maintien_prix else None)
@@ -98,7 +103,7 @@ with col2:
         color_discrete_map=competitor_colors
     )
     fig_bench.update_layout(template="plotly_white")
-    st.plotly_chart(fig_bench, use_container_width=True)
+    st.plotly_chart(fig_bench, width='stretch')
 
     st.markdown("**Positionnement :**")
     bench_text_pdf = []
@@ -131,7 +136,7 @@ fig_stack = px.bar(
     }
 )
 fig_stack.update_layout(template="plotly_white")
-st.plotly_chart(fig_stack, use_container_width=True)
+st.plotly_chart(fig_stack, width='stretch')
 
 
 # --- EXPORT ---

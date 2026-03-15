@@ -14,7 +14,7 @@ class ReportGenerator:
         pdf.cell(0, 15, "Rapport de Simulation - Alterna Energie", new_x=XPos.LMARGIN, new_y=YPos.NEXT, align='C')
         pdf.ln(5)
         
-        # Paramètres
+        # paramètres
         pdf.set_font("helvetica", "B", 14)
         pdf.cell(0, 10, "1. Configuration de la simulation", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
         pdf.set_font("helvetica", "", 11)
@@ -23,7 +23,7 @@ class ReportGenerator:
             pdf.cell(0, 7, f"- {k} : {v_text}", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
         pdf.ln(5)
 
-        # Graphiques
+        # graphiques
         pdf.set_font("helvetica", "B", 14)
         pdf.cell(0, 10, "2. Analyse Visuelle", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
         
@@ -34,7 +34,7 @@ class ReportGenerator:
                 pdf.image(img_path, x=15, w=180)
                 pdf.ln(5)
                 
-        # Benchmarking
+        # benchmarking
         pdf.add_page()
         pdf.set_font("helvetica", "B", 14)
         pdf.cell(0, 10, "3. Positionnement Concurrentiel", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
